@@ -21,49 +21,100 @@ export default async function WorkDetailPage({
   }
 
   return (
-    <div className="container">
-      <div style={{ marginBlock: "40px" }}>
-        <Link href="/works" className="btn-outline" style={{ display: "inline-block", marginBottom: "20px" }}>
+    <div className="container" style={{ paddingBlock: "80px" }}>
+      <div style={{ marginBottom: "40px" }}>
+        <Link href="/works" className="btn-outline">
           &larr; Back to Works
         </Link>
-        
-        <header style={{ marginBottom: "40px" }}>
-          <div style={{ display: "flex", gap: "10px", alignItems: "center", marginBottom: "10px" }}>
-             <span className="tag">{work.tag}</span>
-             <span style={{ color: "#666", fontSize: "14px" }}>{work.id}</span>
-          </div>
-          <h1 style={{ fontSize: "3rem", lineHeight: "1.1", marginBottom: "20px" }}>{work.title}</h1>
-          <div style={{ display: "flex", gap: "20px", color: "#666", fontFamily: "monospace" }}>
-             <span>LOCATION: {work.location}</span>
-             <span>YEAR: {work.year}</span>
-          </div>
-        </header>
+      </div>
 
-        <div style={{ 
-          width: "100%", 
-          aspectRatio: "16/9", 
-          backgroundImage: `url(${work.image})`, 
-          backgroundSize: "cover", 
+      <header style={{ marginBottom: "60px", maxWidth: "800px" }}>
+        <div style={{ display: "flex", gap: "15px", alignItems: "center", marginBottom: "20px" }}>
+          <span className="tag">{work.tag}</span>
+          <span style={{ color: "var(--text-light)", fontFamily: "monospace", fontSize: "14px" }}>
+            {work.id}
+          </span>
+        </div>
+        <h1 style={{ 
+          fontFamily: "var(--font-serif), serif", 
+          fontSize: "clamp(32px, 5vw, 48px)", 
+          lineHeight: "1.2", 
+          marginBottom: "20px" 
+        }}>
+          {work.title}
+        </h1>
+        <div style={{ display: "flex", gap: "30px", fontSize: "16px", color: "var(--text-light)" }}>
+          <span>
+            <strong>Location:</strong> {work.location}
+          </span>
+          <span>
+            <strong>Year:</strong> {work.year}
+          </span>
+        </div>
+      </header>
+
+      <div
+        style={{
+          width: "100%",
+          aspectRatio: "16/9",
+          backgroundImage: `url(${work.image})`,
+          backgroundSize: "cover",
           backgroundPosition: "center",
-          borderRadius: "12px",
-          marginBottom: "40px"
-        }} />
+          borderRadius: "8px",
+          marginBottom: "60px",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
+        }}
+      />
 
-        <div style={{ maxWidth: "800px", marginInline: "auto" }}>
-           <h2 style={{ fontSize: "24px", marginBottom: "20px", fontFamily: "serif" }}>Project Overview</h2>
-           <p style={{ fontSize: "18px", lineHeight: "1.8", color: "#333", marginBottom: "40px" }}>
-             {work.description}
-           </p>
-           
-           <div style={{ padding: "30px", background: "#f5f5f5", borderRadius: "8px" }}>
-             <h3 style={{ fontSize: "18px", marginBottom: "15px" }}>Technical Data</h3>
-             <ul style={{ listStyle: "none", padding: 0, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
-               <li><strong>Camera:</strong> Leica M10-R</li>
-               <li><strong>Lens:</strong> Summilux-M 35mm f/1.4 ASPH.</li>
-               <li><strong>Film Simulation:</strong> Custom Monochrome</li>
-               <li><strong>Print:</strong> Gelatin Silver Print</li>
-             </ul>
-           </div>
+      <div className="two-col" style={{ alignItems: "start" }}>
+        <div>
+          <h2 style={{ 
+            fontFamily: "var(--font-serif), serif", 
+            fontSize: "24px", 
+            marginBottom: "30px",
+            borderBottom: "2px solid var(--accent)",
+            display: "inline-block",
+            paddingBottom: "5px"
+          }}>
+            Project Overview
+          </h2>
+          <p style={{ 
+            fontSize: "18px", 
+            lineHeight: "2", 
+            color: "var(--text)", 
+            textAlign: "justify",
+            marginBottom: "40px"
+          }}>
+            {work.description}
+          </p>
+        </div>
+
+        <div className="card" style={{ background: "var(--bg-alt)", border: "none" }}>
+          <h3 style={{ fontSize: "18px", marginBottom: "20px", fontFamily: "var(--font-serif), serif" }}>
+            Technical Data
+          </h3>
+          <ul style={{ listStyle: "none", display: "grid", gap: "15px" }}>
+            <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+              <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Camera</span>
+              <span>Leica M10-R</span>
+            </li>
+            <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+              <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Lens</span>
+              <span>Summilux-M 35mm f/1.4</span>
+            </li>
+            <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+              <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Simulation</span>
+              <span>Custom Monochrome</span>
+            </li>
+            <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+              <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Print</span>
+              <span>Gelatin Silver Print</span>
+            </li>
+             <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+              <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Size</span>
+              <span>A2 (420 x 594 mm)</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
