@@ -12,17 +12,18 @@ const tags = [
 
 export default function WorksPage() {
   return (
-    <div className="container">
-      <header className="page-header">
-        <h1>Works</h1>
-        <p>
-          展示ごとの作品アーカイブ一覧です。会場と公開年を記録しています。
-          詳細な来歴や非公開素材は掲載していません。
+    <div className="container" style={{ paddingBlock: "60px" }}>
+      <header className="page-header" style={{ marginBottom: "60px", borderBottom: "none", textAlign: "center" }}>
+        <h1 style={{ fontSize: "3rem", marginBottom: "20px" }}>Works</h1>
+        <p style={{ maxWidth: "600px", margin: "0 auto", color: "var(--text-light)" }}>
+          都市の断片を記録した写真アーカイブ。
+          過去の展示作品から主要なシリーズを体系的に分類し、公開しています。
         </p>
       </header>
 
-      <section className="section" style={{ paddingTop: 0 }}>
-        <div className="badge-grid">
+      <section style={{ marginBottom: "60px" }}>
+        <div className="badge-grid" style={{ justifyContent: "center" }}>
+          <span className="tag" style={{ background: "var(--accent)", color: "white" }}>All</span>
           {tags.map((tag) => (
             <span key={tag} className="tag" data-tag={tag}>
               {tag}
@@ -33,14 +34,17 @@ export default function WorksPage() {
 
       <section className="grid grid-3">
         {works.map((work) => (
-          <Link href={`/works/${work.id}`} key={work.id} className="card work-card" data-id={work.id}>
-            <div className="work-img" style={{ backgroundImage: `url(${work.image})` }} />
+          <Link href={`/works/${work.id}`} key={work.id} className="work-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div className="work-img" style={{ backgroundImage: `url(${work.image})`, height: "240px" }} />
             <div className="work-body">
-              <span className="tag">{work.tag}</span>
-              <h3 className="work-title" style={{ fontSize: "18px", marginTop: "10px" }}>{work.title}</h3>
-              <p className="work-meta">
-                {work.location} / {work.year}
-              </p>
+              <span className="work-cat" style={{ fontSize: "11px", letterSpacing: "0.1em" }}>{work.tag}</span>
+              <h3 className="work-title" style={{ fontSize: "20px", marginTop: "5px", marginBottom: "15px" }}>{work.title}</h3>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <p className="work-meta" style={{ fontSize: "12px", fontFamily: "monospace" }}>
+                  {work.location} / {work.year}
+                </p>
+                <span style={{ fontSize: "12px", color: "var(--accent)" }}>View Detail &rarr;</span>
+              </div>
             </div>
           </Link>
         ))}
