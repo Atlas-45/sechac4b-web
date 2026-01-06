@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { works } from "../data/works";
 
 const tags = [
@@ -11,6 +14,12 @@ const tags = [
 ];
 
 export default function WorksPage() {
+  const [selectedTag, setSelectedTag] = useState("All");
+
+  const filteredWorks = selectedTag === "All" 
+    ? works 
+    : works.filter((work) => work.tag === selectedTag);
+
   return (
     <div className="container" style={{ paddingBlock: "60px" }}>
       <header className="page-header" style={{ marginBottom: "60px", borderBottom: "none", textAlign: "center" }}>
@@ -23,17 +32,42 @@ export default function WorksPage() {
 
       <section style={{ marginBottom: "60px" }}>
         <div className="badge-grid" style={{ justifyContent: "center" }}>
-          <span className="tag" style={{ background: "var(--accent)", color: "white" }}>All</span>
+          <button 
+            onClick={() => setSelectedTag("All")}
+            className="tag" 
+            style={{ 
+              background: selectedTag === "All" ? "var(--accent)" : "#f0f0f0", 
+              color: selectedTag === "All" ? "white" : "#555",
+              border: "none",
+              cursor: "pointer",
+              fontSize: "13px",
+              fontFamily: "inherit"
+            }}
+          >
+            All
+          </button>
           {tags.map((tag) => (
-            <span key={tag} className="tag" data-tag={tag}>
+            <button 
+              key={tag} 
+              onClick={() => setSelectedTag(tag)}
+              className="tag" 
+              style={{
+                background: selectedTag === tag ? "var(--accent)" : "#f0f0f0", 
+                color: selectedTag === tag ? "white" : "#555",
+                border: "none",
+                cursor: "pointer",
+                fontSize: "13px",
+                fontFamily: "inherit"
+              }}
+            >
               {tag}
-            </span>
+            </button>
           ))}
         </div>
       </section>
 
       <section className="grid grid-3">
-        {works.map((work) => (
+        {filteredWorks.map((work) => (
           <Link href={`/works/${work.id}`} key={work.id} className="work-card" style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="work-img" style={{ backgroundImage: `url(${work.image})`, height: "240px" }} />
             <div className="work-body">
