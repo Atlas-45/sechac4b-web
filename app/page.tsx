@@ -1,46 +1,11 @@
 import Link from "next/link";
+import { works } from "./data/works";
+import { changelog } from "./data/changelog";
 
-const featuredWorks = [
-  {
-    title: "霧の河",
-    location: "横浜",
-    year: "2025",
-    cat: "Monochrome",
-    image: "https://images.unsplash.com/photo-1617438817509-70e91ad264a5?q=80&w=800&auto=format&fit=crop",
-  },
-  {
-    title: "午後の余白",
-    location: "代官山",
-    year: "2024",
-    cat: "Portrait",
-    image: "https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=800&auto=format&fit=crop",
-  },
-  {
-    title: "境界線",
-    location: "竹芝",
-    year: "2025",
-    cat: "Architecture",
-    image: "https://images.unsplash.com/photo-1493934558415-9d19f0b2b4d2?q=80&w=800&auto=format&fit=crop",
-  },
-];
-
-const updates = [
-  {
-    date: "2026.01.03",
-    cat: "お知らせ",
-    title: "プレス素材の整理と命名規則を更新しました。",
-  },
-  {
-    date: "2025.12.18",
-    cat: "作品情報",
-    title: "作品一覧に2025年展示の記録を追加しました。",
-  },
-  {
-    date: "2025.11.28",
-    cat: "お知らせ",
-    title: "問い合わせ窓口の受付時間を調整しました。",
-  },
-];
+// Featured works: Pick the first 3
+const featuredWorks = works.slice(0, 3);
+// Recent updates: Pick the first 3
+const recentUpdates = changelog.slice(0, 3);
 
 export default function Home() {
   return (
@@ -76,11 +41,11 @@ export default function Home() {
             <p className="section-sub">最新のお知らせと更新情報</p>
           </div>
           <div className="news-list">
-            {updates.map((item, i) => (
-              <div key={i} className="news-item">
+            {recentUpdates.map((item) => (
+              <div key={item.id} className="news-item">
                 <span className="news-date">{item.date}</span>
                 <div className="news-content">
-                  <Link href="#" className="news-title">
+                  <Link href={`/changelog/${item.id}`} className="news-title">
                     {item.title}
                   </Link>
                 </div>
@@ -104,8 +69,8 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-3">
-            {featuredWorks.map((work, i) => (
-              <div key={i} className="work-card">
+            {featuredWorks.map((work) => (
+              <Link key={work.id} href={`/works/${work.id}`} className="work-card" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
                 <div
                   className="work-img"
                   style={{
@@ -113,13 +78,13 @@ export default function Home() {
                   }}
                 />
                 <div className="work-body">
-                  <span className="work-cat">{work.cat}</span>
+                  <span className="work-cat">{work.tag}</span>
                   <h3 className="work-title">{work.title}</h3>
                   <p className="work-meta">
                     {work.location} / {work.year}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: "40px" }}>
